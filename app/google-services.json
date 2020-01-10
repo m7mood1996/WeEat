@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "859450653627",
+    "firebase_url": "https://weeat2020-3bc6b.firebaseio.com",
+    "project_id": "weeat2020-3bc6b",
+    "storage_bucket": "weeat2020-3bc6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859450653627:android:54d6d3f0ada757d994a29e",
+        "android_client_info": {
+          "package_name": "com.mahmood_anas.weeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859450653627-0sim3e3vcc4lrccpt9b9mn6seekjs0s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXqNk-sHimqtOH6uK8DbWw3f7txQ_clZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859450653627-0sim3e3vcc4lrccpt9b9mn6seekjs0s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
