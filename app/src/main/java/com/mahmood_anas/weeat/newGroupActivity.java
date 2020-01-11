@@ -1,14 +1,25 @@
 package com.mahmood_anas.weeat;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +39,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 import java.util.Calendar;
 
@@ -41,7 +53,12 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
     EditText restaurantName;
     EditText namePart;
     EditText phoneNumber;
+    private LocationListener locationListener;
+    private LocationManager locationManager;
+    Address address;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +75,68 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         namePart = findViewById(R.id.part_name);
         phoneNumber = findViewById(R.id.phone_number);
 
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                //Geocoder geocoder =new Geocoder(this,location.getLatitude(),location.getLongitude())
+                //List<Address> addresses =  gecoder.get
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                startActivity(intent);
+
+            }
+        };
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},10);
+            return;
+        }
+        else{
+            locationManager.requestLocationUpdates("gps", 5000, 100, locationListener);
+
+        }
+
+
+
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case 10:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    configerButton();
+                else
+                    finish();
+        }
+    }
 
+    public void configerButton(){
+
+
+
+    }
 
 
     public void getPhotofromphone(){
@@ -104,6 +180,8 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
 
 
     public void addNewGroupWithPhoto() {
+
+
         if (filePath != null) {
             // Code for showing progressDialog while uploading
             final ProgressDialog progressDialog = new ProgressDialog(this);
