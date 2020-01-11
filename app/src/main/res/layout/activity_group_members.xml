@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GroupMembers">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/grp_name"
+            android:text="staam"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        >
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/grp_img"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="401dp"
+        android:layout_marginTop="20dp"
+        >
+        <ListView
+            android:id="@+id/list_members"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"></ListView>
+    </LinearLayout>
+
+    <Button
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Join"
+            android:id="@+id/join_grp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            />
+
+</LinearLayout>

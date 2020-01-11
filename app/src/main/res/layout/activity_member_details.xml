@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00BD1818"
+    tools:context=".MemberDetails"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:fontFamily="serif-monospace"
+            android:text="Member Details"
+            android:textAlignment="center"
+            android:textColor="#140000"
+            android:textSize="45dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="166dp"
+            android:layout_height="58dp"
+            android:text="Member Name :"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Your name"
+            android:id="@+id/new_name"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="182dp"
+            android:layout_height="58dp"
+            android:text="Member Number :"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Your number"
+            android:id="@+id/new_num"
+            />
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/add_member"
+            android:layout_marginTop="25dp"
+            android:layout_width="140dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:text="Add"
+            />
+
+</LinearLayout>

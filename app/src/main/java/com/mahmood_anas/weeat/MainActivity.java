@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Parcelable;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener {
@@ -93,18 +95,18 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         GroupInfo groupInfo = groupInfos.get(position);
-        showSimpleAlert(groupInfo.getImageUrl(), groupInfo.getRestaurantName() , groupInfo.getLocation(),groupInfo.getNumber_of_members(),groupInfo.getTime_added(),groupInfo.bitmap);
+        Intent Group_Members = new Intent(MainActivity.this, GroupMembers.class);
+        String key = groupInfo.getGroupKey();
+        String url = groupInfo.getImageUrl();
+        String name_res = groupInfo.getRestaurantName();
+        Group_Members.putExtra("KEY", key);
+        Group_Members.putExtra("RES", name_res);
+        Group_Members.putExtra("URL", url);
+
+        startActivity(Group_Members);
     }
 
-    public void showSimpleAlert(String imageResId, String resurantName, String location, String number_of_members, String time_added, Bitmap bitmap)
-    {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle(resurantName);
-        alertDialog.setMessage("Ver Number: " +location + "number_of_members:" + number_of_members + "time added:" + time_added + "image" + imageResId);
-        alertDialog.setIcon(bitmap.getGenerationId());
-        alertDialog.setPositiveButton("OK", null);
-        alertDialog.show();
-    }
+
 
 
     public void fetchDataFromFireBase() {
