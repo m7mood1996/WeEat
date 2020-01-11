@@ -99,21 +99,83 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
             getPhotofromphone();
         }
         else if (v.getId() == R.id.new_group_button)
-            AddnewMember();
+            addNewGroupWithPhoto();
     }
 
 
-    public void AddnewMember() {
-        System.out.println(filePath.toString());
+    public void addNewGroupWithPhoto() {
+        if (filePath != null) {
+            // Code for showing progressDialog while uploading
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setMax(100);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
 
+            // Defining the child of storageReference
+            final StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
 
+            // adding listeners on upload
+            // or failure of image
+            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // Image uploaded successfully
+                    // Dismiss dialog
+                    progressDialog.dismiss();
+                    Toast.makeText(newGroupActivity.this, "Image Uploaded!!", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener(){
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Error, Image not uploaded
+                    progressDialog.dismiss();
+                    Toast.makeText(newGroupActivity.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                // Progress Listener for loading
+                // percentage on the dialog box
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded " + (int) progress );
+                    progressDialog.setProgress((int) (progress));
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            addGrouptofirebase(uri);
+                        }
+                    });
+
+                }
+            });
+
+        }
+        else{
+            addGrouptofirebase(null);
+        }
     }
 
-    public void addGrouptofirebase(){
+
+
+    public void addGrouptofirebase(Uri uri){
         String mGroupId = FirebaseDatabase.getInstance().getReference().push().getKey();
-        //String url = uri.toString();
         DatabaseReference mDatabase = (FirebaseDatabase.getInstance().getReference()).child("Groups").child(mGroupId);
-        //mDatabase.child("imageUrl").setValue(url);
+
+        if (uri != null) {
+            String url = uri.toString();
+            mDatabase.child("imageUrl").setValue(url);
+        }
+
+        else{
+            mDatabase.child("imageUrl").setValue("null");
+        }
+
         mDatabase.child("restaurantName").setValue(restaurantName.getText().toString());
         mDatabase.child("Time").setValue("number_of_members");
         mDatabase.child("imageResourceId").setValue("number_of_members");

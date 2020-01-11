@@ -1,6 +1,7 @@
 package com.mahmood_anas.weeat;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -92,15 +93,15 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         GroupInfo groupInfo = groupInfos.get(position);
-        showSimpleAlert(groupInfo.getImageResourceId(), groupInfo.getRestaurantName() , groupInfo.getLocation(),groupInfo.getNumber_of_members(),groupInfo.getTime_added());
+        showSimpleAlert(groupInfo.getImageUrl(), groupInfo.getRestaurantName() , groupInfo.getLocation(),groupInfo.getNumber_of_members(),groupInfo.getTime_added(),groupInfo.bitmap);
     }
 
-    public void showSimpleAlert(String imageResId, String resurantName,String location, String number_of_members, String time_added)
+    public void showSimpleAlert(String imageResId, String resurantName, String location, String number_of_members, String time_added, Bitmap bitmap)
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle(resurantName);
         alertDialog.setMessage("Ver Number: " +location + "number_of_members:" + number_of_members + "time added:" + time_added + "image" + imageResId);
-        alertDialog.setIcon(R.drawable.donut);
+        alertDialog.setIcon(bitmap.getGenerationId());
         alertDialog.setPositiveButton("OK", null);
         alertDialog.show();
     }
@@ -111,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         // get data about email
 
         // get data about phone num
-
         ref.child("Groups").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -121,18 +121,19 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
                 for (DataSnapshot ds : snapshot.getChildren()) {
 
                     String restaurantName = (String) ds.child("restaurantName").getValue();
-
-                    String imageResourceId = (String)ds.child("imageResourceId").getValue();
+                    String groupKey = (String) ds.getKey();
+                    String imageResourceId = (String)ds.child("imageUrl").getValue();
                     String Time = (String) ds.child("Time").getValue();
                     String location = (String) ds.child("location").getValue();
                     String number = (String) ds.child("numberofmembers").getValue();
 
-                    GroupInfo groupInfo = new GroupInfo(restaurantName,number,imageResourceId,Time,location);
+                    GroupInfo groupInfo = new GroupInfo(restaurantName,number,imageResourceId,Time,location,groupKey);
                     groupInfos.add(groupInfo);
+                    groupInfosAdapter.notifyDataSetChanged();
 
                 }
 
-                groupInfosAdapter.notifyDataSetChanged();
+
 
             }
 
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
             }
         });
 
-
+        //groupInfosAdapter.notifyDataSetChanged();
 
     }
 
