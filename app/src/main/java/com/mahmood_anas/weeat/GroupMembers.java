@@ -94,18 +94,16 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                membersInfo.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    membersInfo.clear();
                     if (!ds.getKey().equals("Time") && !ds.getKey().equals("imageUrl") && !ds.getKey().equals("location") && !ds.getKey().equals("numberofmembers") && !ds.getKey().equals("restaurantName")) {
-                        System.out.println("I'm this : \t" + ds.child(ds.getKey()).child("name"));
                         name = (String) ds.child("name").getValue();
                         number = (String) ds.child("phoneNumber").getValue();
-                        System.out.println("name is \t" + name);
-                        System.out.println("num is \t" + number);
+                        /*System.out.println("name is \t" + name);
+                        System.out.println("num is \t" + number);*/
+                        MembersInfo members = new MembersInfo(name, number);
+                        membersInfo.add(members);
                     }
-                    MembersInfo members = new MembersInfo(name, number);
-                    membersInfo.add(members);
-
                 }
                 membersAdapter.notifyDataSetChanged();
             }
