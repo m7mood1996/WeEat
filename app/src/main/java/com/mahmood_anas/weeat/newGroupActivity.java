@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -53,9 +54,11 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
     EditText restaurantName;
     EditText namePart;
     EditText phoneNumber;
+    EditText numberofmembers;
     private LocationListener locationListener;
     private LocationManager locationManager;
-    Address address;
+    List<Address> addresses;
+    String Address;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -74,14 +77,24 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         restaurantName = findViewById(R.id.restaurantName_input);
         namePart = findViewById(R.id.part_name);
         phoneNumber = findViewById(R.id.phone_number);
-
+        numberofmembers = findViewById(R.id.num_of_members);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        final Geocoder geocoder =new Geocoder(this);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                try {
+                    addresses= geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+                    String addres = addresses.get(0).getAddressLine(0);
+                    String area = addresses.get(0).getLocality();
+                    String city = addresses.get(0).getAdminArea();
+                    String country = addresses.get(0).getCountryName();
 
-                //Geocoder geocoder =new Geocoder(this,location.getLatitude(),location.getLongitude())
-                //List<Address> addresses =  gecoder.get
+                    Address = addres + ", " + area+ ", " + city + ", " + country;
+                    System.out.println(Address+ "hello--");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -134,9 +147,8 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
 
     public void configerButton(){
 
-
-
     }
+
 
 
     public void getPhotofromphone(){
@@ -255,18 +267,21 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         }
 
         mDatabase.child("restaurantName").setValue(restaurantName.getText().toString());
-        mDatabase.child("Time").setValue("number_of_members");
-        mDatabase.child("imageResourceId").setValue("number_of_members");
-        mDatabase.child("location").setValue("number_of_members");
-        mDatabase.child("numberofmembers").setValue("SLA");
+        mDatabase.child("Time").setValue(Calendar.getInstance().getTime().toString());
+        mDatabase.child("location").setValue(Address);
+        mDatabase.child("numberofmembers").setValue(numberofmembers.getText().toString());
 
         mGroupId = mDatabase.push().getKey();
 
-        mDatabase.child(mGroupId).child("name").setValue("my_name");
-        mDatabase.child(mGroupId).child("phoneNumber").setValue("my_phone_number");
+        mDatabase.child(mGroupId).child("name").setValue(namePart.getText().toString());
+        mDatabase.child(mGroupId).child("phoneNumber").setValue(phoneNumber.getText().toString());
+        Intent service = new Intent(this,SMSNotifiIntintService.class);
+        service.putExtra("group_id",mGroupId);
+        service.putExtra("group_size",Integer.parseInt( numberofmembers.getText().toString()));
 
 
-
+        startService(service);
+        finish();
 
     }
 
