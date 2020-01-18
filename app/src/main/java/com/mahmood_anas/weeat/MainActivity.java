@@ -1,5 +1,6 @@
 package com.mahmood_anas.weeat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,26 +69,29 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.about_menu:   // when about clicked in menu
+                openAboutDialog();
+                return true;
+            case R.id.exit_menu:    // when exit clicked in menu
+                openExitDialog();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -146,5 +151,36 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
 
     }
 
+
+    private void openExitDialog() {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setIcon(R.drawable.burger_icon);
+        alertDialog.setTitle("Exit WeEat");
+        alertDialog.setMessage("Are you sure that you want to exit?");
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void openAboutDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setIcon(R.drawable.burger_icon);
+        alertDialog.setTitle("About WeEat");
+        alertDialog.setMessage("This app implements WeEat.\nBy Mahmood and Anas (c).");
+        alertDialog.setCancelable(true);
+        alertDialog.show();
+
+    }
 
 }

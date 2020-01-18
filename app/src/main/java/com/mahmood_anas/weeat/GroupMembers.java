@@ -13,9 +13,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,12 +30,13 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class GroupMembers extends AppCompatActivity implements ListView.OnItemClickListener {
+public class GroupMembers extends AppCompatActivity implements ListView.OnItemClickListener, View.OnClickListener{
 
     private ArrayList<MembersInfo> membersInfo;
     TextView Group_Name;
     ImageView Group_Image;
     String key, name, number;
+    Button Join;
     String url;
     FirebaseDatabase database;
     DatabaseReference ref;
@@ -45,6 +48,7 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
         setContentView(R.layout.activity_group_members);
         Group_Name = findViewById(R.id.grp_name);
         Group_Image = findViewById(R.id.grp_img);
+        Join = findViewById(R.id.join_id);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
         Group_Name.setText(getIntent().getStringExtra("RES"));
@@ -76,6 +80,25 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MembersInfo membersInf = membersInfo.get(position);
         showSimpleAlert(membersInf.getName(), membersInf.getNumber());
+    }
+
+    @Override
+    public void onClick(View v) {
+//        if (view.getId() == R.id.join_grp){
+//            System.out.println("I have to enter here !! ");
+//            key = getIntent().getStringExtra("KEY");
+//            Intent Member_Details = new Intent(this,MemberDetails.class);
+//            Member_Details.putExtra("KEY", key);
+//            startActivity(Member_Details);
+//        }
+        switch (v.getId()) {
+            case R.id.join_id:
+                System.out.println("I have to enter here !! ");
+                key = getIntent().getStringExtra("KEY");
+                Intent intent = new Intent(GroupMembers.this, MemberDetails.class);
+                intent.putExtra("KEY", key);
+                startActivity(intent);
+        }
     }
 
     public void showSimpleAlert(String verName, String verNum) {
@@ -115,6 +138,8 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
         };
         ref.child("Groups").child(key).addValueEventListener(valueEventListener);
     }
+
+
 
 
     private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {

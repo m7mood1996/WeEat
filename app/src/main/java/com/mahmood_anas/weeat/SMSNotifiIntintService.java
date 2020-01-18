@@ -27,6 +27,7 @@ public class SMSNotifiIntintService extends IntentService {
     FirebaseDatabase database;
     DatabaseReference ref;
     String name, number;
+    int size = -1;
 
 
     public SMSNotifiIntintService() {
@@ -46,11 +47,9 @@ public class SMSNotifiIntintService extends IntentService {
         ref.child("Groups").child(group_id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int size = -1;
 
                 while (size - 5 != group_size)
                     size = (int) dataSnapshot.getChildrenCount();
-
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     if (!ds.getKey().equals("Time") && !ds.getKey().equals("imageUrl") && !ds.getKey().equals("location") && !ds.getKey().equals("numberofmembers") && !ds.getKey().equals("restaurantName")) {
                         name = (String) ds.child("name").getValue();
