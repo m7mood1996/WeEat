@@ -44,19 +44,19 @@ public class SMSNotifiIntintService extends IntentService {
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
 
-        ref.child("Groups").child(group_id).addValueEventListener(new ValueEventListener() {
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                while (size - 5 != group_size)
-                    size = (int) dataSnapshot.getChildrenCount();
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    if (!ds.getKey().equals("Time") && !ds.getKey().equals("imageUrl") && !ds.getKey().equals("location") && !ds.getKey().equals("numberofmembers") && !ds.getKey().equals("restaurantName")) {
-                        name = (String) ds.child("name").getValue();
-                        number = (String) ds.child("phoneNumber").getValue();
-                        sendSMS(number);
+                size = (int) dataSnapshot.getChildrenCount();
+                if (size - 5 == group_size)
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        if (!ds.getKey().equals("Time") && !ds.getKey().equals("imageUrl") && !ds.getKey().equals("location") && !ds.getKey().equals("numberofmembers") && !ds.getKey().equals("restaurantName")) {
+                            name = (String) ds.child("name").getValue();
+                            number = (String) ds.child("phoneNumber").getValue();
+                            sendSMS(number);
+                        }
                     }
-                }
 
             }
 
@@ -64,7 +64,16 @@ public class SMSNotifiIntintService extends IntentService {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        };
+
+
+        while (size - 5 < group_size) {
+            database = FirebaseDatabase.getInstance();
+            ref = database.getReference();
+            ref.child("Groups").child(group_id).addValueEventListener(valueEventListener);
+        }
+
+
 
     }
 

@@ -270,17 +270,20 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         mDatabase.child("Time").setValue(Calendar.getInstance().getTime().toString());
         mDatabase.child("location").setValue(Address);
         mDatabase.child("numberofmembers").setValue(numberofmembers.getText().toString());
+
         Intent service = new Intent(this,SMSNotifiIntintService.class);
         service.putExtra("group_id",mGroupId);
-        service.putExtra("group_size",Integer.parseInt( numberofmembers.getText().toString()));
+
         mGroupId = mDatabase.push().getKey();
 
         mDatabase.child(mGroupId).child("name").setValue(namePart.getText().toString());
         mDatabase.child(mGroupId).child("phoneNumber").setValue(phoneNumber.getText().toString());
 
+        service.putExtra("group_size",Integer.parseInt( numberofmembers.getText().toString()));
+
+
         startService(service);
         finish();
-
 
     }
 
