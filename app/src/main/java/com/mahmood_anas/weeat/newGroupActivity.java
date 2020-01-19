@@ -281,11 +281,14 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
 
         service.putExtra("group_size",Integer.parseInt( numberofmembers.getText().toString()));
 
-
+        //sendBroadcast(service.setAction("MyAction"));
         startService(service);
+
+
         finish();
 
     }
+
 
 
 

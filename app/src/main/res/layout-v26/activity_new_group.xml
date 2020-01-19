@@ -110,9 +110,9 @@
 
         <ImageView
             android:id="@+id/imageToUpload"
+            android:layout_width="383dp"
+            android:layout_height="128dp"
             android:layout_gravity="center"
-            android:layout_width="512px"
-            android:layout_height="512px"
             android:layout_weight="1"
             app:srcCompat="@drawable/burger_icon" />
     </LinearLayout>

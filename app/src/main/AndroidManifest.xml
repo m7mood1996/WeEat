@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,9 +16,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name="com.mahmood_anas.weeat.IncomingSms">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".StartServiceBroadcastReceiver">
+            <intent-filter>
+                <action android:name=".CUSTOM_INTENT">
+                </action>
+            </intent-filter>
+
+        </receiver>
         <service
-            android:name=".SMSNotifiIntintService"
-            android:exported="false"></service>
+            android:name=".SMSNotifiIntintService"/>
 
         <activity
             android:name=".MainActivity"

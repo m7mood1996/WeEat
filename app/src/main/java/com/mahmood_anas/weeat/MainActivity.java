@@ -1,8 +1,11 @@
 package com.mahmood_anas.weeat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,9 +17,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.view.MenuInflater;
 import android.view.View;
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     FirebaseDatabase database;
     DatabaseReference ref;
     GroupInfoAdapter groupInfosAdapter;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,22 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         groupInfos = new ArrayList<GroupInfo>();
 
         groupInfosAdapter = new GroupInfoAdapter(this, groupInfos);
+
+        if (checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            requestPermissions(new String[]{Manifest.permission.SEND_SMS,Manifest.permission.RECEIVE_SMS},10);
+            return;
+        }
+        else{
+
+
+        }
 
         // Get a reference to the ListView, and attach the adapter to the listView.
         ListView listView = findViewById(R.id.list_view_groups);
