@@ -8,7 +8,9 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Address;
@@ -282,6 +284,14 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         service.putExtra("group_id",mGroupId);
 
         mGroupId = mDatabase.push().getKey();
+
+
+
+        SharedPreferences sp = getSharedPreferences("my_id", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        editor.putString("id",mGroupId );
+        editor.commit();
+
 
         mDatabase.child(mGroupId).child("name").setValue(namePart.getText().toString());
         mDatabase.child(mGroupId).child("phoneNumber").setValue(phoneNumber.getText().toString());

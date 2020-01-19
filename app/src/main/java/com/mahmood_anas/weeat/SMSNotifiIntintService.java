@@ -131,8 +131,6 @@ public class SMSNotifiIntintService extends Service {
 
             System.out.println("bye bye from the service");
 
-
-
             stopSelf();
 
         }
@@ -148,7 +146,7 @@ public class SMSNotifiIntintService extends Service {
 
     public void sendSMS(String phoneNumber){
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(phoneNumber, null, "WeEat our fuckin app m7mad bdo ed3s 3lek ya 3rs", null, null);
+        smsManager.sendTextMessage(phoneNumber, null, "This is WeEat App. Your group is ready to order food", null, null);
 
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
