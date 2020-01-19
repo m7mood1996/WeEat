@@ -87,10 +87,9 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
                     addresses= geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
                     String addres = addresses.get(0).getAddressLine(0);
                     String area = addresses.get(0).getLocality();
-                    String city = addresses.get(0).getAdminArea();
-                    String country = addresses.get(0).getCountryName();
 
-                    Address = addres + ", " + area+ ", " + city + ", " + country;
+
+                    Address = addres + ", " + area;
                     System.out.println(Address+ "hello--");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -126,7 +125,7 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
         else{
-            locationManager.requestLocationUpdates("gps", 5000, 100, locationListener);
+            locationManager.requestLocationUpdates("gps", 0, 0, locationListener);
 
         }
 

@@ -155,19 +155,19 @@ public class SMSNotifiIntintService extends Service {
 
         // Build Notification with NotificationCompat.Builder
         // on Build.VERSION < Oreo the notification avoid the CHANEL_ID
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
-                .setSmallIcon(R.drawable.burger_icon)  //Set the icon
-                .setContentTitle("hello")         //Set the title of notification
-                .setContentText("5ara")           //Set the text for notification
-                .setContentIntent(pendingIntent)            // Starts Intent when notification clicked
-                //.setOngoing(true)                         // stick notification
-                .setAutoCancel(true)                        // close notification when clicked
-                .build();
-
-        // Send the notification to the device Status bar.
-        notificationManager.notify(1, notification);
-
-        notificationId++;
+//        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
+//                .setSmallIcon(R.drawable.burger_icon)  //Set the icon
+//                .setContentTitle("hello")         //Set the title of notification
+//                .setContentText("5ara")           //Set the text for notification
+//                .setContentIntent(pendingIntent)            // Starts Intent when notification clicked
+//                //.setOngoing(true)                         // stick notification
+//                .setAutoCancel(true)                        // close notification when clicked
+//                .build();
+//
+//        // Send the notification to the device Status bar.
+//        notificationManager.notify(1, notification);
+//
+//        notificationId++;
     }
 
     @Nullable
