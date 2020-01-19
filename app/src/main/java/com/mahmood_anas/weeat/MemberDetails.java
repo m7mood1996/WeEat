@@ -23,6 +23,8 @@ public class MemberDetails extends AppCompatActivity implements View.OnClickList
         Mem_Name = findViewById(R.id.new_name);
         Mem_Num = findViewById(R.id.new_num);
         Add_Mem = findViewById(R.id.add_member);
+
+        Add_Mem.setOnClickListener(this);
     }
 
     @Override

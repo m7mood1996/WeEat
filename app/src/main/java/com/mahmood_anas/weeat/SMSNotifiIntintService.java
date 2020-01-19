@@ -182,7 +182,7 @@ public class SMSNotifiIntintService extends Service {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
-                    CHANNEL_ID_2,
+                    CHANNEL_ID,
                     " Channel-2",
                     NotificationManager.IMPORTANCE_DEFAULT
             );

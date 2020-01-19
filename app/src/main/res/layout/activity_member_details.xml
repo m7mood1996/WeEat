@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Your number"
+            android:inputType="phone"
             android:id="@+id/new_num"
             />
     </LinearLayout>
@@ -74,7 +75,6 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:text="Add"
-            android:onClick="onClick"
             />
 
 </LinearLayout>

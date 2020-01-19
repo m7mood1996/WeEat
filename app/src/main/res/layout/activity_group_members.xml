@@ -54,7 +54,6 @@
             android:text="Join"
             android:id="@+id/join_id"
             android:textAlignment="center"
-            android:onClick="onClick"
             android:textStyle="bold"
             android:textSize="18dp"
             />

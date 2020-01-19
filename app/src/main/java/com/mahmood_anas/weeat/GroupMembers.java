@@ -55,6 +55,8 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
         url = getIntent().getStringExtra("URL");
         //Uri uri = Uri.parse(url);
         //System.out.println("url is \t" + uri);
+
+        Join.setOnClickListener(this);
         new DownloadImageFromInternet().execute(url);
 
 
