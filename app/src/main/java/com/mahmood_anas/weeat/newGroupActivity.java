@@ -59,8 +59,7 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
     private LocationManager locationManager;
     List<Address> addresses;
     String Address;
-
-
+    Boolean isInt;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,11 +181,20 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.upload_photo_button){
+        if (v.getId() == R.id.upload_photo_button)
+        {
             getPhotofromphone();
         }
         else if (v.getId() == R.id.new_group_button)
-            addNewGroupWithPhoto();
+        {
+            if (numberofmembers.getText().toString().equals("") || namePart.getText().toString().equals("") || phoneNumber.getText().toString().equals("") || restaurantName.getText().toString().equals(""))
+            {
+                Toast.makeText(this, "Please fill all the fields !", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                addNewGroupWithPhoto();
+            }
+        }
     }
 
 

@@ -84,14 +84,8 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
 
     @Override
     public void onClick(View v) {
-//        if (view.getId() == R.id.join_grp){
-//            System.out.println("I have to enter here !! ");
-//            key = getIntent().getStringExtra("KEY");
-//            Intent Member_Details = new Intent(this,MemberDetails.class);
-//            Member_Details.putExtra("KEY", key);
-//            startActivity(Member_Details);
-//        }
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.join_id:
                 System.out.println("I have to enter here !! ");
                 key = getIntent().getStringExtra("KEY");
