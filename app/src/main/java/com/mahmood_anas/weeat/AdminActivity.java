@@ -116,32 +116,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         ref.child("Groups").child(key).addValueEventListener(valueEventListener);
     }
 
-    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
 
-
-        public DownloadImageFromInternet() {
-
-
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL = urls[0];
-            Bitmap bimage = null;
-            try {
-                InputStream in = new java.net.URL(imageURL).openStream();
-                bimage = BitmapFactory.decodeStream(in);
-
-            } catch (Exception e) {
-                Log.e("Error Message", e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            Group_Image.setImageBitmap(result);
-        }
-    }
 
 
 

@@ -81,8 +81,6 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         namePart = findViewById(R.id.part_name);
         phoneNumber = findViewById(R.id.phone_number);
         numberofmembers = findViewById(R.id.num_of_members);
-
-        
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         final Geocoder geocoder =new Geocoder(this);
         locationListener = new LocationListener() {

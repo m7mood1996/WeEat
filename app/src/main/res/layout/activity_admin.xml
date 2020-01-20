@@ -25,14 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:orientation="vertical"
-        >
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:id="@+id/final_grp_img"
-            />
-    </LinearLayout>
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
