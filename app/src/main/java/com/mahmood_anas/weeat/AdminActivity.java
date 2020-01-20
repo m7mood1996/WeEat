@@ -45,7 +45,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_admin);
 
         Group_Name = findViewById(R.id.final_grp_name);
-        Group_Image = findViewById(R.id.final_grp_img);
         Done = findViewById(R.id.done);
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
