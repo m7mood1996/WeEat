@@ -91,6 +91,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String s = (String)dataSnapshot.child("restaurantName").getValue();
+                Group_Name.setText(s);
 
                 membersInfo.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {

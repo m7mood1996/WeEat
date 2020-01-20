@@ -63,8 +63,7 @@ public class SMSNotifiIntintService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Foreground Service")
-                .setContentText("hello")
+                .setContentTitle("Waiting for Group members")
                 .setSmallIcon(R.drawable.burger_icon)
                 .setContentIntent(pendingIntent)
                 .build();

@@ -56,7 +56,7 @@ public class NotificationService extends Service {
                     .setContentIntent(pIntent)
                     .setAutoCancel(true)
                    // .setActions("",pIntent)
-                    .addAction(R.drawable.burger_icon, "Get phone numbers", pIntent).build();
+                    .addAction(R.drawable.burger_icon, "Show Group members", pIntent).build();
 
 
             NotificationManager notificationManager =
@@ -70,7 +70,7 @@ public class NotificationService extends Service {
 
             System.out.println("in notification service member");
 
-            Intent intent1 = new Intent(this, AdminActivity.class);
+            Intent intent1 = new Intent();
             PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
             // build notification
