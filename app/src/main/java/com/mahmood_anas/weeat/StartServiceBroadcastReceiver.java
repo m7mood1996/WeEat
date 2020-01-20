@@ -42,7 +42,8 @@ public class StartServiceBroadcastReceiver extends BroadcastReceiver {
 
                     Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
                     // this is the our message we should handle it
-                    if(message.equals("This is WeEat App. Your group is ready to order food")){
+                    if(message.equals("This is WeEat App. Your group is ready to order food"))
+                    {
                         do_work(context);
 
                     }
