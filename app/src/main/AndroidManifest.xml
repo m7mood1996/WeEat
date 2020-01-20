@@ -32,6 +32,10 @@
         <service
             android:name=".SMSNotifiIntintService"/>
 
+
+        <service
+            android:name=".NotificationService"/>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

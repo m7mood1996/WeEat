@@ -65,7 +65,7 @@ public class StartServiceBroadcastReceiver extends BroadcastReceiver {
         SharedPreferences sp = context.getSharedPreferences("my_id", Context.MODE_PRIVATE);
         String s = sp.getString("id", null);
         System.out.println("message from sp" + s);
-        sp.edit().clear().commit();
+        sp.edit().clear().apply();
         // the group creator
         if (s != null){
             System.out.println("message admin bc" );
@@ -80,7 +80,7 @@ public class StartServiceBroadcastReceiver extends BroadcastReceiver {
         else{
             System.out.println("message member bc" );
             Intent i = new Intent(context, NotificationService.class);
-            i.putExtra("admin",true);
+            i.putExtra("admin",false);
             context.startService(i);
 
 
