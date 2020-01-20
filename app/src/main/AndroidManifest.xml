@@ -43,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AdminActivity"/>
         <activity android:name=".GroupMembers" />
         <activity android:name=".newGroupActivity" />
         <activity android:name=".MemberDetails"/>

@@ -81,6 +81,8 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         namePart = findViewById(R.id.part_name);
         phoneNumber = findViewById(R.id.phone_number);
         numberofmembers = findViewById(R.id.num_of_members);
+
+        
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         final Geocoder geocoder =new Geocoder(this);
         locationListener = new LocationListener() {
@@ -285,25 +287,19 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
         Intent service = new Intent(this,SMSNotifiIntintService.class);
         service.putExtra("group_id",mGroupId);
 
+
+        SharedPreferences sp = getSharedPreferences("my_id", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        editor.putString("id",mGroupId );
+        editor.commit();
+
         mGroupId = mDatabase.push().getKey();
-
-
-
-
-
 
 
         mDatabase.child(mGroupId).child("name").setValue(namePart.getText().toString());
         mDatabase.child(mGroupId).child("phoneNumber").setValue(phoneNumber.getText().toString());
 
         service.putExtra("group_size",Integer.parseInt( numberofmembers.getText().toString()));
-
-
-
-        SharedPreferences sp = getSharedPreferences("my_id", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor =sp.edit();
-        editor.putString("id",mGroupId );
-        editor.commit();
 
 
 

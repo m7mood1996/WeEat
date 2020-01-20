@@ -16,7 +16,7 @@ import androidx.core.app.NotificationCompat;
 public class NotificationService extends Service {
     String CHANNEL_ID = "channel3";
     NotificationManager manager;
-
+    String key;
 
     @Nullable
     @Override
@@ -40,8 +40,11 @@ public class NotificationService extends Service {
 
         // admin notification
         if (admin){
-
-            Intent intent1 = new Intent(this, MainActivity.class);
+            System.out.println("I'm the admin\t" + admin);
+            Intent intent1 = new Intent(this, AdminActivity.class);
+            key = intent.getStringExtra("id");
+            System.out.println("ID is like this \t" + key);
+            intent1.putExtra("KEY", key);
             PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
         // build notification
@@ -52,6 +55,7 @@ public class NotificationService extends Service {
                     .setSmallIcon(R.drawable.burger_icon)
                     .setContentIntent(pIntent)
                     .setAutoCancel(true)
+                   // .setActions("",pIntent)
                     .addAction(R.drawable.burger_icon, "Get phone numbers", pIntent).build();
 
 
@@ -66,7 +70,7 @@ public class NotificationService extends Service {
 
             System.out.println("in notification service member");
 
-            Intent intent1 = new Intent(this, MainActivity.class);
+            Intent intent1 = new Intent(this, AdminActivity.class);
             PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
             // build notification

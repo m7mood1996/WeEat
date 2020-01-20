@@ -3,6 +3,9 @@ package com.mahmood_anas.weeat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -31,7 +34,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     ImageView Group_Image;
     String key, name, number;
     Button Done;
-    String url;
+    //String url;
     FirebaseDatabase database;
     DatabaseReference ref;
     MembersAdapter membersAdapter;
@@ -48,12 +51,19 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         ref = database.getReference();
         membersInfo = new ArrayList<MembersInfo>();
         membersAdapter = new MembersAdapter(this, membersInfo);
-        ListView listView = findViewById(R.id.list_members);
+        ListView listView = findViewById(R.id.list_members_2);
         listView.setAdapter(membersAdapter);
+
+        SharedPreferences sp = getSharedPreferences("my_id", Context.MODE_PRIVATE);
+
+        key = sp.getString("id", null);
+        System.out.println("message in Admin" + key);
+        sp.edit().clear().apply();
+
 
         // add Item Click Listener
         listView.setOnItemClickListener(this);
-        new DownloadImageFromInternet().execute(url);
+        //new DownloadImageFromInternet().execute(url);
         Done.setOnClickListener(this);
 
         fetchDataFromFireBase();
@@ -63,7 +73,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.done:
-                deleteGroup();
+                ref.child("Groups").child(key).removeValue();
+                finish();
         }
 
     }
@@ -74,13 +85,13 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void fetchDataFromFireBase() {
-        key = getIntent().getStringExtra("KEY");
         // get data about email
         // get data about phone num
         //String k = ref.child("Groups").getPath().toString();
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 membersInfo.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     if (!ds.getKey().equals("Time") && !ds.getKey().equals("imageUrl") && !ds.getKey().equals("location") && !ds.getKey().equals("numberofmembers") && !ds.getKey().equals("restaurantName")) {
@@ -130,10 +141,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void deleteGroup()
-    {
-        key = getIntent().getStringExtra("KEY");
-        DatabaseReference deleteGroup = (FirebaseDatabase.getInstance().getReference()).child("Groups").child(key);
-        deleteGroup.removeValue();
-    }
+
+
 }
