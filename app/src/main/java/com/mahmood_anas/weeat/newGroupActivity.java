@@ -3,6 +3,7 @@ package com.mahmood_anas.weeat;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -287,16 +289,23 @@ public class newGroupActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-        SharedPreferences sp = getSharedPreferences("my_id", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor =sp.edit();
-        editor.putString("id",mGroupId );
-        editor.commit();
+
+
 
 
         mDatabase.child(mGroupId).child("name").setValue(namePart.getText().toString());
         mDatabase.child(mGroupId).child("phoneNumber").setValue(phoneNumber.getText().toString());
 
         service.putExtra("group_size",Integer.parseInt( numberofmembers.getText().toString()));
+
+
+
+        SharedPreferences sp = getSharedPreferences("my_id", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        editor.putString("id",mGroupId );
+        editor.commit();
+
+
 
         //sendBroadcast(service.setAction("MyAction"));
         startService(service);

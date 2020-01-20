@@ -66,15 +66,15 @@
             />
     </LinearLayout>
 
-        <Button
-            android:id="@+id/add_member"
-            android:layout_marginTop="25dp"
-            android:layout_width="140dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:text="Add"
-            />
+    <Button
+        android:id="@+id/add_member"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Add"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 </LinearLayout>

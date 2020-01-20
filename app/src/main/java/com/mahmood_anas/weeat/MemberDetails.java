@@ -1,7 +1,9 @@
 package com.mahmood_anas.weeat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +22,7 @@ public class MemberDetails extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_details);
+
         Mem_Name = findViewById(R.id.new_name);
         Mem_Num = findViewById(R.id.new_num);
         Add_Mem = findViewById(R.id.add_member);

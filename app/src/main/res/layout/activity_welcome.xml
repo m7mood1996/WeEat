@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F2D3D"
+    android:background="#ad1457"
     android:orientation="vertical"
     >
 
@@ -10,12 +10,11 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="384dp"
-        android:background="@mipmap/ic_welcome_logo" />
+        android:background="@drawable/mainlogo" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:background="#1F2D3F"
         android:text="Developed by :"
         android:textAlignment="center"
         android:textColor="#E2DEDE"
@@ -25,7 +24,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#1F2D3F"
         android:text="Anas Aburmeileh"
         android:textAlignment="center"
         android:textColor="#E2DEDE"
@@ -35,17 +33,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="66dp"
-        android:background="#1F2D3F"
         android:text="Mahmoud Qawasmi"
         android:textAlignment="center"
         android:textColor="#E2DEDE"
         android:textSize="25dp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_copyright" />
 
 
 </LinearLayout>

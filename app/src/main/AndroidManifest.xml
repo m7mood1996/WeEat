@@ -18,14 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name="com.mahmood_anas.weeat.IncomingSms">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
         <receiver android:name=".StartServiceBroadcastReceiver">
             <intent-filter>
-                         <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
 
         </receiver>
@@ -39,14 +34,15 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".welcomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".welcomeActivity" />
         <activity android:name=".GroupMembers" />
         <activity android:name=".newGroupActivity" />
         <activity android:name=".MemberDetails"/>

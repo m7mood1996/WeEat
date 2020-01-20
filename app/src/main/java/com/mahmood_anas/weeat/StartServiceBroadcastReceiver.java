@@ -46,11 +46,6 @@ public class StartServiceBroadcastReceiver extends BroadcastReceiver {
                         do_work(context);
 
                     }
-                    // Show Alert
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(context,
-                            "senderNum: "+ senderNum + ", message: " + message, duration);
-                    toast.show();
 
                 } // end for loop
             } // bundle is null

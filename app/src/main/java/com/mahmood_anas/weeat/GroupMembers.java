@@ -3,10 +3,12 @@ package com.mahmood_anas.weeat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +48,7 @@ public class GroupMembers extends AppCompatActivity implements ListView.OnItemCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_members);
+
         Group_Name = findViewById(R.id.grp_name);
         Group_Image = findViewById(R.id.grp_img);
         Join = findViewById(R.id.join_id);

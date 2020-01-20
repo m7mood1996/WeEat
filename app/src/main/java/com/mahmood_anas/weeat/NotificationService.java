@@ -40,31 +40,19 @@ public class NotificationService extends Service {
 
         // admin notification
         if (admin){
-            /*Intent notificationIntent = new Intent(this, MainActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                    0, notificationIntent, 0);
-            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle("This is the Admin")
-                    .setContentText("You are the admin")
-                    .setSmallIcon(R.drawable.burger_icon)
-                    .setContentIntent(pendingIntent)
-                    .build();
-            manager.notify(1,notification);
-            System.out.println("admin notification");*/
+
             Intent intent1 = new Intent(this, MainActivity.class);
             PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
 
-// build notification
-// the addAction re-use the same intent to keep the example short
+        // build notification
+            // the addAction re-use the same intent to keep the example short
             Notification n  = new Notification.Builder(this)
                     .setContentTitle("This is the admin")
-                    .setContentText("Subject")
+                    .setContentText("Your group members waiting for you click to get their phone numbers")
                     .setSmallIcon(R.drawable.burger_icon)
                     .setContentIntent(pIntent)
                     .setAutoCancel(true)
-                    .addAction(R.drawable.burger_icon, "Call", pIntent)
-                    .addAction(R.drawable.burger_icon, "More", pIntent)
-                    .addAction(R.drawable.burger_icon, "And more", pIntent).build();
+                    .addAction(R.drawable.burger_icon, "Get phone numbers", pIntent).build();
 
 
             NotificationManager notificationManager =
@@ -84,14 +72,11 @@ public class NotificationService extends Service {
             // build notification
             // the addAction re-use the same intent to keep the example short
             Notification n  = new Notification.Builder(this)
-                    .setContentTitle("This is a member")
-                    .setContentText("Subject")
+                    .setContentTitle("This is WeEat")
+                    .setContentText("Your group is full. wait for your group leader to send you message")
                     .setSmallIcon(R.drawable.burger_icon)
                     .setContentIntent(pIntent)
-                    .setAutoCancel(true)
-                    .addAction(R.drawable.burger_icon, "Call", pIntent)
-                    .addAction(R.drawable.burger_icon, "More", pIntent)
-                    .addAction(R.drawable.burger_icon, "And more", pIntent).build();
+                    .setAutoCancel(true).build();
 
 
             NotificationManager notificationManager =
